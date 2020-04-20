@@ -106,7 +106,7 @@
                 <input type="text" ng-model="computedColumn.label" class="form-control">
               </div>
               <div class="form-group">
-                <label>Formula (<a ng-href="https://github.com/fbaligand/kibana-enhanced-table/blob/master/README.md#computed-column-formula--lines-computed-filter-documentation" target="_blank">documentation</a>)</label>
+                <label>Formula (<a ng-href="https://github.com/nsheo/kibana-sound-table-test/blob/master/README.md#computed-column-formula--lines-computed-filter-documentation" target="_blank">documentation</a>)</label>
                 <input type="text" ng-model="computedColumn.formula" class="form-control" />
               </div>
               <div class="form-group">
@@ -174,7 +174,7 @@
 
     <div class="euiSpacer euiSpacer--s"></div>
     <div class="form-group">
-      <label>Lines computed filter (<a ng-href="https://github.com/fbaligand/kibana-enhanced-table/blob/master/README.md#computed-column-formula--lines-computed-filter-documentation" target="_blank">documentation</a>)&nbsp;
+      <label>Lines computed filter (<a ng-href="https://github.com/nsheo/kibana-sound-table-test/blob/master/README.md#computed-column-formula--lines-computed-filter-documentation" target="_blank">documentation</a>)&nbsp;
         <icon-tip
           content="'Example: when \'col0 &gt; 10\', only table lines having first column value greater than 10 are displayed'"
           position="'right'"
@@ -267,14 +267,34 @@
     </div>
 
   </div>
-
+  <!-- BASIC SETTINGS SECTION -->
+  <div class="visEditorSidebar__section">
+    <div class="visEditorSidebar__sectionTitle">
+        Sound Alarm Settings
+    </div>
+    <div class="form-group">
+	  <label>
+        <input type="checkbox" ng-model="editorState.params.soundAlarmUsage">
+        Usage
+      </label>
+	  <label>Type</label>
+	  <select ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmBaseUnit" class="form-control">
+        <option>row</option>
+        <option>value</option>
+      </select>
+	  <label>Thresholds</label>
+      <input type="text" ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmThreshold" class="form-control" placeholder="80 or Critical">
+      <label>Column Labels</label>
+      <input type="text" ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmLabels" class="form-control" placeholder="Label1,Label2...">
+    </div>
+  </div>
   <!-- BASIC SETTINGS SECTION -->
   <div class="visEditorSidebar__section">
 
     <div class="visEditorSidebar__sectionTitle">
         Basic Settings
     </div>
-
+	
     <div class="form-group">
       <label
         for="datatableVisualizationPerPage"

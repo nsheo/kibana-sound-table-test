@@ -21,14 +21,13 @@ import { uiModules } from 'ui/modules';
 import enhancedTableVisParamsTemplate from './enhanced-table-vis-params.html';
 import _ from 'lodash';
 
-uiModules.get('kibana/enhanced-table')
+uiModules.get('kibana/enhanced-table-test')
   .directive('enhancedTableVisParams', function () {
     return {
       restrict: 'E',
       template: enhancedTableVisParamsTemplate,
       link: function ($scope) {
         $scope.totalAggregations = ['sum', 'avg', 'min', 'max', 'count'];
-
         if ($scope.editorState.params.perPage === undefined) {
           _.extend($scope.editorState.params, $scope.vis.type.params.defaults);
         }

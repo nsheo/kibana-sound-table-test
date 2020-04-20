@@ -67,7 +67,11 @@ const tableVisTypeDefinition = {
       filterAsYouType: false,
       filterTermsSeparately: false,
       filterHighlightResults: false,
-      filterBarWidth: '25%'
+      filterBarWidth: '25%',
+	  soundAlarmUsage: false,
+	  soundAlarmBaseUnit: 'value',
+	  soundAlarmLabels: null,
+	  soundAlarmThreshold: null
     },
     template: tableVisTemplate
   },
