@@ -1,0 +1,23 @@
+{
+  "name": "enhanced-table",
+  "version": "1.8.0",
+  "description": "This visualization plugin is like a Data Table, but with enhanced features like computed columns, filter bar and pivot table",
+  "main": "index.js",
+  "kibana": {
+    "version": "kibana"
+  },
+  "scripts": {
+    "preinstall": "node ../../preinstall_check",
+    "kbn": "node ../../scripts/kbn",
+    "es": "node ../../scripts/es",
+    "lint": "../../node_modules/.bin/eslint .",
+    "start": "../../node_modules/.bin/plugin-helpers start --oss --no-watch",
+    "test:server": "../../node_modules/.bin/plugin-helpers test:server",
+    "test:browser": "../../node_modules/.bin/plugin-helpers test:browser",
+    "build": "../../node_modules/.bin/plugin-helpers build"
+  },
+  "dependencies": {
+    "expr-eval": "2.0.2",
+    "dragula": "3.7.2"
+  }
+}
