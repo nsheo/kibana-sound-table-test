@@ -888,76 +888,77 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		// Check Data to Call Alarm
 		
 		if (params.soundAlarmUsage) {
-			if(params.soundAlarmBaseUnit === 'value'){
-				
-				var labelArray = null;
-				var checkColumnLabel = new Array();
-				var checkColumnId = new Array();
-				
-				if(params.soundAlarmLabels != null){
-					labelArray = params.soundAlarmLabels.split(',');
-				}
-				
-				table.colums.forEach(function(col) {
-					if(labelArray != null){
-						labelArray.forEach(function(label){
-							if(col.name === label.trim()){
-								checkColumnLabel.push(col.name);
-								checkColumnId.push(col.aggConfig.id);
-							}
-						});
+			tableGroups.tables.forEach(function alarmCheck(table) {
+				if(params.soundAlarmBaseUnit === 'value'){
+					var labelArray = null;
+					var checkColumnLabel = new Array();
+					var checkColumnId = new Array();
+					
+					if(params.soundAlarmLabels != null){
+						labelArray = params.soundAlarmLabels.split(',');
 					}
-					else {
-						checkColumnLabel.push(col.name);
-						checkColumnId.push(col.aggConfig.id);
-					}
-				});
-				
-				if(checkColumnId.length > 0){
-					table.rows.forEach(function(row) {
-						row.forEach(function(rowAggData){
-							checkColumnId.forEach(function(colId){
-								if(rowAggData.aggConfig.id === colId){
-									if(params.soundAlarmDataType === 'string'){
-										alarmCheck = rowAggData.value === soundAlarmThreshold ? true : false;
-									} else {
-										if(isNumeric(params.soundAlarmThreshold) && isNumeric(rowAggData.value)){
-											if(params.soundAlarmComparisonOper === 'over'){
-												alarmCheck = rowAggData.value > Number(soundAlarmThreshold) ? true : false;
-											} else if(params.soundAlarmComparisonOper === 'eq'){
-												alarmCheck = rowAggData.value == Number(soundAlarmThreshold) ? true : false;
-											} else {
-												alarmCheck =rowAggData.value < Number(soundAlarmThreshold) ? true : false;	
+					
+					table.colums.forEach(function(col) {
+						if(labelArray != null){
+							labelArray.forEach(function(label){
+								if(col.name === label.trim()){
+									checkColumnLabel.push(col.name);
+									checkColumnId.push(col.aggConfig.id);
+								}
+							});
+						}
+						else {
+							checkColumnLabel.push(col.name);
+							checkColumnId.push(col.aggConfig.id);
+						}
+					});
+					
+					if(checkColumnId.length > 0){
+						table.rows.forEach(function(row) {
+							row.forEach(function(rowAggData){
+								checkColumnId.forEach(function(colId){
+									if(rowAggData.aggConfig.id === colId){
+										if(params.soundAlarmDataType === 'string'){
+											alarmCheck = rowAggData.value === soundAlarmThreshold ? true : false;
+										} else {
+											if(isNumeric(params.soundAlarmThreshold) && isNumeric(rowAggData.value)){
+												if(params.soundAlarmComparisonOper === 'over'){
+													alarmCheck = rowAggData.value > Number(soundAlarmThreshold) ? true : false;
+												} else if(params.soundAlarmComparisonOper === 'eq'){
+													alarmCheck = rowAggData.value == Number(soundAlarmThreshold) ? true : false;
+												} else {
+													alarmCheck = rowAggData.value < Number(soundAlarmThreshold) ? true : false;	
+												}
 											}
 										}
 									}
-								}
+									return (alarmCheck);
+								});
 								return (alarmCheck);
 							});
 							return (alarmCheck);
 						});
-						return (alarmCheck);
-					});
-				}
-			  
-			} else if(params.soundAlarmBaseUnit === 'row'){
-				
-				if(isNumeric(params.soundAlarmThreshold)){
-					if(params.soundAlarmComparisonOper === 'over'){
-						alarmCheck = tableGroups.tables.rows.length > Number(soundAlarmThreshold) ? true : false;
-					} else if(params.soundAlarmComparisonOper === 'eq'){
-						alarmCheck = tableGroups.tables.rows.length == Number(soundAlarmThreshold) ? true : false;
-					} else {
-						alarmCheck = tableGroups.tables.rows.length < Number(soundAlarmThreshold) ? true : false;	
 					}
+				  
+				} else if(params.soundAlarmBaseUnit === 'row'){
+					
+					if(isNumeric(params.soundAlarmThreshold)){
+						if(params.soundAlarmComparisonOper === 'over'){
+							alarmCheck = table.rows.length > Number(soundAlarmThreshold) ? true : false;
+						} else if(params.soundAlarmComparisonOper === 'eq'){
+							alarmCheck = table.rows.length == Number(soundAlarmThreshold) ? true : false;
+						} else {
+							alarmCheck = table.rows.length < Number(soundAlarmThreshold) ? true : false;	
+						}
+					}
+					
 				}
 				
-			}
+				if(alarmCheck){
+					console.log("Run Alarm Check")
+				}
+			});
         }
-		
-		if(alarmCheck){
-			console.log("Run Alarm Check")
-		}
       
       }
 
