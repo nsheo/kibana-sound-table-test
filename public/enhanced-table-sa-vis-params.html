@@ -273,19 +273,48 @@
         Sound Alarm Settings
     </div>
     <div class="form-group">
-	  <label>
-        <input type="checkbox" ng-model="editorState.params.soundAlarmUsage">
-        Usage
-      </label>
-	  <label>Type</label>
-	  <select ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmBaseUnit" class="form-control">
-        <option>row</option>
-        <option>value</option>
-      </select>
-	  <label>Thresholds</label>
-      <input type="text" ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmThreshold" class="form-control" placeholder="80 or Critical">
-      <label>Column Labels</label>
-      <input type="text" ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmLabels" class="form-control" placeholder="Label1,Label2...">
+	
+	  <div class="checkbox">
+		<label>
+		  <input type="checkbox" ng-model="editorState.params.soundAlarmUsage">
+		  Usage
+		</label>
+	  </div>
+	  
+	  <div>
+	    <label>Type</label>
+	    <select ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmBaseUnit" class="form-control">
+          <option>row</option>
+          <option>value</option>
+        </select>
+	  </div>
+	  
+	  <div>
+	    <label>Data Type</label>
+	    <select ng-disabled="!editorState.params.soundAlarmUsage || editorState.params.soundAlarmBaseUnit === 'row'" ng-model="editorState.params.soundAlarmDataType" class="form-control">
+          <option>string</option>
+          <option>number</option>
+        </select>
+	  </div>
+	  
+	  <div>
+	    <label>Comparison</label>
+	    <select ng-disabled="!editorState.params.soundAlarmUsage || (editorState.params.soundAlarmBaseUnit === 'value' && editorState.params.soundAlarmDataType === 'string')" ng-model="editorState.params.soundAlarmComparisonOper" class="form-control">
+          <option>over</option>
+          <option>eq</option>
+		  <option>under</option>
+        </select>
+	  </div>
+	  
+	  <div>
+	    <label>Thresholds</label>
+        <input type="text" ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmThreshold" class="form-control" placeholder="80 or Critical">
+	  </div>
+	  
+	  <div>
+        <label>Column Labels</label>
+        <input type="text" ng-disabled="!editorState.params.soundAlarmUsage || editorState.params.soundAlarmBaseUnit === 'row'" ng-model="editorState.params.soundAlarmLabels" class="form-control" placeholder="Label1,Label2...">
+	  </div>
     </div>
   </div>
   <!-- BASIC SETTINGS SECTION -->

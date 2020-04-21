@@ -70,6 +70,8 @@ const tableVisTypeDefinition = {
       filterBarWidth: '25%',
 	  soundAlarmUsage: false,
 	  soundAlarmBaseUnit: 'value',
+	  soundAlarmDataType: 'string',
+	  soundAlarmComparisonOper: 'eq',
 	  soundAlarmLabels: null,
 	  soundAlarmThreshold: null
     },

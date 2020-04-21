@@ -776,6 +776,10 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		console.log(e.message);	
 	}   
   }
+  
+  const isNumeric = function (n) {
+	return !isNaN(parseFloat(n)) && isFinite(n);
+  }
   /**
    * Recreate the entire table when:
    * - the underlying data changes (esResponse)
@@ -879,7 +883,82 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		
 		console.log("Check Parameters - params")
 		console.log(params)
-
+		
+		var alarmCheck = false;
+		// Check Data to Call Alarm
+		
+		if (params.soundAlarmUsage) {
+			if(params.soundAlarmBaseUnit === 'value'){
+				
+				var labelArray = null;
+				var checkColumnLabel = new Array();
+				var checkColumnId = new Array();
+				
+				if(params.soundAlarmLabels != null){
+					labelArray = params.soundAlarmLabels.split(',');
+				}
+				
+				table.colums.forEach(function(col) {
+					if(labelArray != null){
+						labelArray.forEach(function(label){
+							if(col.name === label.trim()){
+								checkColumnLabel.push(col.name);
+								checkColumnId.push(col.aggConfig.id);
+							}
+						});
+					}
+					else {
+						checkColumnLabel.push(col.name);
+						checkColumnId.push(col.aggConfig.id);
+					}
+				});
+				
+				if(checkColumnId.length > 0){
+					table.rows.forEach(function(row) {
+						if(alarmCheck) break;
+						row.forEach(function(rowAggData){
+							if(alarmCheck) break;
+							checkColumnId.forEach(function(colId){
+								if(alarmCheck) break;
+								if(rowAggData.aggConfig.id === colId){
+									if(params.soundAlarmDataType === 'string'){
+										alarmCheck = rowAggData.value === soundAlarmThreshold ? true : false;
+									} else {
+										if(isNumeric(params.soundAlarmThreshold) && isNumeric(rowAggData.value)){
+											if(params.soundAlarmComparisonOper === 'over'){
+												alarmCheck = rowAggData.value > Number(soundAlarmThreshold) ? true : false;
+											} else if(params.soundAlarmComparisonOper === 'eq'){
+												alarmCheck = rowAggData.value == Number(soundAlarmThreshold) ? true : false;
+											} else {
+												alarmCheck =rowAggData.value < Number(soundAlarmThreshold) ? true : false;	
+											}
+										}
+									}
+								}
+							});
+						});
+					});
+				}
+			  
+			} else if(params.soundAlarmBaseUnit === 'row'){
+				
+				if(isNumeric(params.soundAlarmThreshold)){
+					if(params.soundAlarmComparisonOper === 'over'){
+						alarmCheck = tableGroups.tables.rows.length > Number(soundAlarmThreshold) ? true : false;
+					} else if(params.soundAlarmComparisonOper === 'eq'){
+						alarmCheck = tableGroups.tables.rows.length == Number(soundAlarmThreshold) ? true : false;
+					} else {
+						alarmCheck = tableGroups.tables.rows.length < Number(soundAlarmThreshold) ? true : false;	
+					}
+				}
+				
+			}
+        }
+		
+		if(alarmCheck){
+			console.log("Run Alarm Check")
+		}
+      
       }
 
       $scope.renderComplete();
