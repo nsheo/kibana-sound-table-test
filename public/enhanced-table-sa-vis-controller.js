@@ -777,14 +777,16 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 			promise.catch(function(e){
 				console.log("runAudioRedAlertPlay")
 				console.log(e.message);	
-				
 				var req = new XMLHttpRequest();
-				req.open('GET', './alert_red.wav', false);
+				req.open('GET', './audio/1/alert_red.wav', false);
 				req.send(null);
 				var headers = req.status;
 				console.log(headers);
+				
 			});
 		}
+		
+		$('#audio').html('<audio autoplay><source src="./alert_red.wav"></audio>');
 	}
 	catch(e){
 		console.log("runAudioRedAlert")
