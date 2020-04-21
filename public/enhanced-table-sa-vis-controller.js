@@ -888,7 +888,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		
 		// Check Data to Call Alarm
 		if (params.soundAlarmUsage) {
-			tableGroups.tables.forEach(function alarmCheck(table) {
+			tableGroups.tables.forEach(function alarmCheckRun(table) {
 				if(params.soundAlarmBaseUnit === 'value'){
 					let labelArray = null;
 					let checkColumnLabel = new Array();
@@ -917,7 +917,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 					if(checkColumnId.length > 0){
 						table.rows.forEach(function(row) {
 							row.forEach(function(rowAggData){
-								console.log("Check forEach - rowAggData : " + rowAggData)
 								checkColumnId.forEach(function(colId){
 									if(rowAggData.aggConfig.id === colId){
 										if(params.soundAlarmDataType === 'string'){
@@ -949,7 +948,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				else if(params.soundAlarmBaseUnit === 'row'){
 					
 					if(isNumeric(params.soundAlarmThreshold)){
-						console.log("Check Over isNumeric");
 						if(params.soundAlarmComparisonOper === 'over'){
 							alarmCheck = table.rows.length > Number(params.soundAlarmThreshold) ? true : false;
 						} 
@@ -959,12 +957,9 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 						else {
 							alarmCheck = table.rows.length < Number(params.soundAlarmThreshold) ? true : false;	
 						}
-						console.log("Check End dataComparison");
 					}
 					
 				}
-				
-				console.log("Check Result : " + alarmCheck);
 				
 				if(alarmCheck){
 					console.log("Run Alarm Check")
