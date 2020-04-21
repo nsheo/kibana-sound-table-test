@@ -760,6 +760,19 @@ function EnhancedTableVisController ($scope, Private, config) {
         });
       }
     }
+	
+	const runAudioRedAlert = function() {
+		try{
+			var audio = new Audio(); 
+			audio.src = "../audio/alert_red.wav"; 
+			console.log("log : moudle - runAudioRedAlert - audio ");
+			console.log(audio);
+			audio.play();  
+		}
+		catch(e){
+			console.log(e.message);	
+		}
+	} 
 
   };
 
@@ -799,7 +812,7 @@ function EnhancedTableVisController ($scope, Private, config) {
             throw new EnhancedTableError('\'Split cols\' bucket must be the last one');
           }
         }
-
+		
         // no data to display
         if (totalHits === 0 || firstTable === null) {
           $scope.hasSomeRows = false;
@@ -864,6 +877,15 @@ function EnhancedTableVisController ($scope, Private, config) {
 
         // process filter bar
         processFilterBarAndRefreshTable();
+		
+		console.log("Check Last Data Table - table")
+		console.log(table)
+		
+		console.log("Check Parameters - params")
+		console.log(params)
+		
+		console.log("test alarm")
+		runAudioRedAlert();
       }
 
       $scope.renderComplete();
