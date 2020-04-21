@@ -868,9 +868,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		
 		console.log("Check Parameters - params")
 		console.log(params)
-		
-		console.log("test alarm")
-		runAudioRedAlert();
       }
 
       $scope.renderComplete();
@@ -888,18 +885,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 
 }
 
-function runAudioRedAlert() {
-	try{
-		var audio = new Audio(); 
-		audio.src = "../audio/alert_red.wav"; 
-		console.log("log : moudle - runAudioRedAlert - audio ");
-		console.log(audio);
-		window.focus();
-		audio.play();  
-	}
-	catch(e){
-		console.log(e.message);	
-	}
-}
+
 
 export { EnhancedTableSaVisController };
