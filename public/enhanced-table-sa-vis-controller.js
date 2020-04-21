@@ -771,9 +771,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		audio.crossOrigin = "anonymous";
 		console.log("log : enhanced-table-sa-vis-controller - runAudioRedAlert - audio ");
 		console.log(audio);
-		console.log(window.URL.createObjectURL("./audio/alert_red.wav"));
 		var promise = audio.play();
-		
 		if(promise){
 			p.catch(function(e){
 				console.log("runAudioRedAlertPlay")
