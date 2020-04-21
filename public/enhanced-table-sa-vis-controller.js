@@ -974,10 +974,11 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				}
 				
 				if(alarmCheck){
-					runAudioRedAlert();
-					console.log("Check test 2")
-					var buf = $('#audio').html('<audio autoplay><source src="./alert_yellow.mp3"></audio>');
-					console.log(buf)
+					//runAudioRedAlert();
+					console.log("Check test buzz")
+					var alarm = new buzz.sound("./alert_yellow.mp3");
+					console.log(alarm);
+					alarm.play();
 				}
 			});
         }
