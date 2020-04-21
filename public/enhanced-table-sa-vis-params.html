@@ -7,10 +7,10 @@
         Computed Columns
     </div>
 
-    <div draggable-container="editorState.params.computedColumns" class="computed-columns">
-      <div ng-repeat="computedColumn in editorState.params.computedColumns"
+    <div draggable-container="editorState.params.computedSaColumns" class="computed-sa-columns">
+      <div ng-repeat="computedSaColumn in editorState.params.computedSaColumns"
            ng-init="editorOpen = initEditorOpen()"
-           draggable-item="computedColumn"
+           draggable-item="computedSaColumn"
            class="euiAccordion visEditorSidebar__section visEditorSidebar__collapsible visEditorSidebar__collapsible--marginBottom">
 
            <!-- header -->
@@ -32,8 +32,8 @@
                  <span class="visEditorSidebar__aggGroupAccordionButtonContent eui-textTruncate">
                     Computed col
                     <!-- description -->
-                    <span ng-if="!editorOpen" title="{{computedColumn.label || computedColumn.formula}}">
-                      {{computedColumn.label || computedColumn.formula}}
+                    <span ng-if="!editorOpen" title="{{computedSaColumn.label || computedSaColumn.formula}}">
+                      {{computedSaColumn.label || computedSaColumn.formula}}
                     </span>
                  </span>
               </button>
@@ -43,12 +43,12 @@
 
                   <!-- disable computed column -->
                   <button
-                    ng-if="computedColumn.enabled"
-                    ng-click="computedColumn.enabled = false"
+                    ng-if="computedSaColumn.enabled"
+                    ng-click="computedSaColumn.enabled = false"
                     aria-label="{{::'enhancedTableSaVis.disableComputedColButtonAriaLabel' | i18n: { defaultMessage: 'Disable Column' } }}"
                     tooltip="{{::'enhancedTableSaVis.disableComputedColButtonTooltip' | i18n: { defaultMessage: 'Disable Column' } }}"
                     tooltip-append-to-body="true"
-                    data-test-subj="disableComputedColumnBtn"
+                    data-test-subj="disablecomputedSaColumnBtn"
                     type="button"
                     class="euiButtonIcon euiButtonIcon--text">
                     <icon type="'eye'" color="'text'"/>
@@ -56,12 +56,12 @@
 
                   <!-- enable computed column -->
                   <button
-                    ng-if="!computedColumn.enabled"
-                    ng-click="computedColumn.enabled = true"
+                    ng-if="!computedSaColumn.enabled"
+                    ng-click="computedSaColumn.enabled = true"
                     aria-label="{{::'enhancedTableSaVis.enableComputedColButtonAriaLabel' | i18n: { defaultMessage: 'Enable Column' } }}"
                     tooltip="{{::'enhancedTableSaVis.enableComputedColButtonTooltip' | i18n: { defaultMessage: 'Enable Column' } }}"
                     tooltip-append-to-body="true"
-                    data-test-subj="enableComputedColumnBtn"
+                    data-test-subj="enablecomputedSaColumnBtn"
                     type="button"
                     class="euiButtonIcon euiButtonIcon--text">
                     <icon type="'eyeClosed'" color="'text'"/>
@@ -70,9 +70,9 @@
                   <!-- drag handle -->
                   <button
                     draggable-handle
-                    ng-if="editorState.params.computedColumns.length > 1"
-                    aria-label="{{::'enhancedTableSaVis.modifyComputedColumnOrderAriaLabel' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
-                    tooltip="{{::'enhancedTableSaVis.modifyComputedColumnOrderButtonTooltip' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
+                    ng-if="editorState.params.computedSaColumns.length > 1"
+                    aria-label="{{::'enhancedTableSaVis.modifycomputedSaColumnOrderAriaLabel' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
+                    tooltip="{{::'enhancedTableSaVis.modifycomputedSaColumnOrderButtonTooltip' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
                     tooltip-append-to-body="true"
                     type="button"
                     keyboard-move="onPriorityReorder(direction)"
@@ -87,9 +87,9 @@
 
                   <!-- remove computed column -->
                   <button
-                    aria-label="{{::'enhancedTableSaVis.removeComputedColumnButtonAriaLabel' | i18n: { defaultMessage: 'Remove Column' } }}"
-                    ng-click="removeComputedColumn(computedColumn, editorState.params.computedColumns)"
-                    tooltip="{{::'enhancedTableSaVis.removeComputedColumnButtonTooltip' | i18n: { defaultMessage: 'Remove Column' } }}"
+                    aria-label="{{::'enhancedTableSaVis.removecomputedSaColumnButtonAriaLabel' | i18n: { defaultMessage: 'Remove Column' } }}"
+                    ng-click="removecomputedSaColumn(computedSaColumn, editorState.params.computedSaColumns)"
+                    tooltip="{{::'enhancedTableSaVis.removecomputedSaColumnButtonTooltip' | i18n: { defaultMessage: 'Remove Column' } }}"
                     tooltip-append-to-body="true"
                     type="button"
                     class="euiButtonIcon euiButtonIcon--text">
@@ -103,71 +103,71 @@
           <div ng-if="editorOpen">
               <div class="form-group">
                 <label>Label</label>
-                <input type="text" ng-model="computedColumn.label" class="form-control">
+                <input type="text" ng-model="computedSaColumn.label" class="form-control">
               </div>
               <div class="form-group">
                 <label>Formula (<a ng-href="https://github.com/nsheo/kibana-sound-table-test/blob/master/README.md#computed-column-formula--lines-computed-filter-documentation" target="_blank">documentation</a>)</label>
-                <input type="text" ng-model="computedColumn.formula" class="form-control" />
+                <input type="text" ng-model="computedSaColumn.formula" class="form-control" />
               </div>
               <div class="form-group">
                 <label>Format</label>
-                <select ng-model="computedColumn.format" class="form-control">
+                <select ng-model="computedSaColumn.format" class="form-control">
                   <option label="Number" value="number">Number</option>
                   <option label="String" value="string">String</option>
                   <option label="Date" value="date">Date</option>
                 </select>
               </div>
-              <div class="form-group" ng-if="computedColumn.format === 'number'">
+              <div class="form-group" ng-if="computedSaColumn.format === 'number'">
                 <label>Pattern (<a ng-href="http://numeraljs.com/#format" target="_blank">Numeral.js</a> syntax)</label>
-                <input type="text" ng-model="computedColumn.pattern" class="form-control">
+                <input type="text" ng-model="computedSaColumn.pattern" class="form-control">
               </div>
-              <div class="form-group" ng-if="computedColumn.format === 'date'">
+              <div class="form-group" ng-if="computedSaColumn.format === 'date'">
                 <label>Pattern (<a ng-href="http://momentjs.com/docs/#/displaying/format/" target="_blank">Moment.js</a> syntax)</label>
-                <input type="text" ng-model="computedColumn.datePattern" class="form-control">
+                <input type="text" ng-model="computedSaColumn.datePattern" class="form-control">
               </div>
               <div class="form-group">
                 <label>Alignment</label>
-                <select ng-model="computedColumn.alignment" class="form-control">
+                <select ng-model="computedSaColumn.alignment" class="form-control">
                   <option>left</option>
                   <option>right</option>
                   <option>center</option>
                   <option>justify</option>
                 </select>
               </div>
-              <div class="checkbox" ng-if="computedColumn.alignment != 'left'">
+              <div class="checkbox" ng-if="computedSaColumn.alignment != 'left'">
                 <label>
-                  <input type="checkbox" ng-model="computedColumn.applyAlignmentOnTitle">
+                  <input type="checkbox" ng-model="computedSaColumn.applyAlignmentOnTitle">
                   Apply alignment on title
                 </label>
               </div>
-              <div class="checkbox" ng-if="computedColumn.alignment != 'left'">
+              <div class="checkbox" ng-if="computedSaColumn.alignment != 'left'">
                 <label>
-                  <input type="checkbox" ng-model="computedColumn.applyAlignmentOnTotal">
+                  <input type="checkbox" ng-model="computedSaColumn.applyAlignmentOnTotal">
                   Apply alignment on total
                 </label>
               </div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" ng-model="computedColumn.applyTemplate">
+                  <input type="checkbox" ng-model="computedSaColumn.applyTemplate">
                   Apply template
                 </label>
               </div>
-              <div class="checkbox" ng-if="computedColumn.applyTemplate">
+              <div class="checkbox" ng-if="computedSaColumn.applyTemplate">
                 <label>
-                  <input type="checkbox" ng-model="computedColumn.applyTemplateOnTotal">
+                  <input type="checkbox" ng-model="computedSaColumn.applyTemplateOnTotal">
                   Apply template on total
                 </label>
               </div>
-              <div class="form-group" ng-if="computedColumn.applyTemplate">
+              <div class="form-group" ng-if="computedSaColumn.applyTemplate">
                 <label>Template (<a ng-href="https://handlebarsjs.com/guide/expressions.html" target="_blank">Handlebars</a> syntax)</label>
-                <input type="text" ng-model="computedColumn.template" class="form-control">
+                <input type="text" ng-model="computedSaColumn.template" class="form-control">
               </div>
           </div>
       </div>
     </div>
 
     <div class="eui-textCenter">
-      <a class="kuiButton kuiButton--secondary kuiButton--small" ng-click="addComputedColumn(editorState.params.computedColumns)">
+      <a class="kuiButton kuiButton--secondary kuiButton--small" ng-click="addcomputedSaColumn(editorState.params.computedSaColumns)">
           Add computed column
       </a>
     </div>

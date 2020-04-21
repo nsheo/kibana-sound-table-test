@@ -238,20 +238,20 @@ function EnhancedTableSaVisController ($scope, Private, config) {
     return value;
   };
 
-  const createTemplate = function (computedColumn, splitColIndex, columns, totalFunc) {
+  const createTemplate = function (computedSaColumn, splitColIndex, columns, totalFunc) {
 
-    if (!computedColumn.applyTemplate) {
+    if (!computedSaColumn.applyTemplate) {
       return undefined;
     }
 
     // convert old col.i.value syntax and manage 'split cols' case
-    let realTemplate = computedColumn.template.replace(/col\.(\d+)\.value\s*\}\}/g, 'col$1}}');
+    let realTemplate = computedSaColumn.template.replace(/col\.(\d+)\.value\s*\}\}/g, 'col$1}}');
 
     // convert col[0] syntax to col0 syntax
     realTemplate = realTemplate.replace(/col\[(\d+)\]\s*\}\}/g, 'col$1}}');
 
     // convert col['colTitle'] syntax to col0 syntax
-    realTemplate = realTemplate.replace(/col\['([^\]]+)'\]\s*\}\}/g, (match, colTitle) => 'col' + findColIndexByTitle(columns, colTitle, computedColumn.template, 'template', splitColIndex) + '}}');
+    realTemplate = realTemplate.replace(/col\['([^\]]+)'\]\s*\}\}/g, (match, colTitle) => 'col' + findColIndexByTitle(columns, colTitle, computedSaColumn.template, 'template', splitColIndex) + '}}');
 
     // set the right column index, depending splitColIndex
     const colRefRegex = /col(\d+)\s*\}\}/g;
@@ -269,7 +269,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
     realTemplate = realTemplate.replace(/total\[(\d+)\]\s*\}\}/g, 'total$1}}');
 
     // convert total['colTitle'] syntax to total0 syntax
-    realTemplate = realTemplate.replace(/total\['([^\]]+)'\]\s*\}\}/g, (match, colTitle) => 'total' + findColIndexByTitle(columns, colTitle, computedColumn.template, 'template', splitColIndex) + '}}');
+    realTemplate = realTemplate.replace(/total\['([^\]]+)'\]\s*\}\}/g, (match, colTitle) => 'total' + findColIndexByTitle(columns, colTitle, computedSaColumn.template, 'template', splitColIndex) + '}}');
 
     // set the right total index, depending splitColIndex
     const totalRefRegex = /total(\d+)\s*\}\}/g;
@@ -307,28 +307,28 @@ function EnhancedTableSaVisController ($scope, Private, config) {
   };
 
   /** create a new data table column for specified computed column */
-  const createColumn = function (computedColumn, index, totalHits, splitColIndex, columns, totalFunc) {
+  const createColumn = function (computedSaColumn, index, totalHits, splitColIndex, columns, totalFunc) {
 
     const fieldFormats = npStart.plugins.data.fieldFormats;
-    const FieldFormat = fieldFormats.getType(computedColumn.format);
+    const FieldFormat = fieldFormats.getType(computedSaColumn.format);
     const fieldFormatParamsByFormat = {
       'string': {},
-      'number': { pattern: computedColumn.pattern },
-      'date': { pattern: computedColumn.datePattern }
+      'number': { pattern: computedSaColumn.pattern },
+      'date': { pattern: computedSaColumn.datePattern }
     };
-    const fieldFormatParams = fieldFormatParamsByFormat[computedColumn.format];
-    const aggSchema = (computedColumn.format === 'number') ? 'metric' : 'bucket';
-    const aggType = (computedColumn.format === 'number') ? 'count' : 'filter';
+    const fieldFormatParams = fieldFormatParamsByFormat[computedSaColumn.format];
+    const aggSchema = (computedSaColumn.format === 'number') ? 'metric' : 'bucket';
+    const aggType = (computedSaColumn.format === 'number') ? 'count' : 'filter';
 
     // create new column object
     const newColumn = {
       id: `computed-col-${index}`,
       aggConfig: new AggConfig($scope.vis.aggs, { schema: aggSchema, type: aggType }),
-      title: computedColumn.label,
+      title: computedSaColumn.label,
       fieldFormatter: new FieldFormat(fieldFormatParams, getConfig),
-      dataAlignmentClass: `text-${computedColumn.alignment}`,
-      formula: createFormula(computedColumn.formula, 'computed column', splitColIndex, columns, totalFunc),
-      template: createTemplate(computedColumn, splitColIndex, columns, totalFunc)
+      dataAlignmentClass: `text-${computedSaColumn.alignment}`,
+      formula: createFormula(computedSaColumn.formula, 'computed column', splitColIndex, columns, totalFunc),
+      template: createTemplate(computedSaColumn, splitColIndex, columns, totalFunc)
     };
 
     // if computed column formula is just a simple column reference (ex: col0), then copy its aggConfig to get filtering feature
@@ -342,14 +342,14 @@ function EnhancedTableSaVisController ($scope, Private, config) {
     }
 
     // define aggConfig identifiers
-    newColumn.aggConfig.id = `1.computed-column-${index}`;
-    newColumn.aggConfig.key = `computed-column-${index}`;
+    newColumn.aggConfig.id = `1.computed-sa-column-${index}`;
+    newColumn.aggConfig.key = `computed-column-sa-${index}`;
 
     // add alignment options
-    if (computedColumn.applyAlignmentOnTotal) {
+    if (computedSaColumn.applyAlignmentOnTotal) {
       newColumn.totalAlignmentClass = newColumn.dataAlignmentClass;
     }
-    if (computedColumn.applyAlignmentOnTitle) {
+    if (computedSaColumn.applyAlignmentOnTitle) {
       newColumn.titleAlignmentClass = newColumn.dataAlignmentClass;
     }
 
@@ -357,7 +357,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
     newColumn.aggConfig.fieldFormatter = function (contentType) {
       return function (value) {
         const self = { value: value, column: newColumn };
-        if (computedColumn.applyTemplate && computedColumn.applyTemplateOnTotal) {
+        if (computedSaColumn.applyTemplate && computedSaColumn.applyTemplateOnTotal) {
           self.templateContext = { total: totalHits };
         }
         return renderCell.call(self, contentType);
@@ -379,10 +379,10 @@ function EnhancedTableSaVisController ($scope, Private, config) {
     return newCell;
   };
 
-  const addComputedColumnToTables = function (tables, index, newColumn, totalHits) {
+  const addcomputedSaColumnToTables = function (tables, index, newColumn, totalHits) {
     _.forEach(tables, function (table) {
       if (table.tables) {
-        addComputedColumnToTables(table.tables, index, newColumn, totalHits);
+        addcomputedSaColumnToTables(table.tables, index, newColumn, totalHits);
         return;
       }
 
@@ -522,14 +522,14 @@ function EnhancedTableSaVisController ($scope, Private, config) {
     }
 
     // define ref row for computed columns
-    const refRowForComputedColumn = (table.refRowWithHiddenCols !== undefined) ? table.refRowWithHiddenCols : _.clone(table.rows[0]);
-    for (let i = 0; i < refRowForComputedColumn.length; i++) {
-      const cell = refRowForComputedColumn[i];
+    const refRowForcomputedSaColumn = (table.refRowWithHiddenCols !== undefined) ? table.refRowWithHiddenCols : _.clone(table.rows[0]);
+    for (let i = 0; i < refRowForcomputedSaColumn.length; i++) {
+      const cell = refRowForcomputedSaColumn[i];
       if (cell.column !== undefined) {
-        refRowForComputedColumn[i] = createComputedCell(cell.column, refRowForComputedColumn, totalHits, table);
+        refRowForcomputedSaColumn[i] = createComputedCell(cell.column, refRowForcomputedSaColumn, totalHits, table);
       }
       else if (cell.type === 'metric') {
-        refRowForComputedColumn[i] = new AggConfigResult(cell.aggConfig, null, DEFAULT_METRIC_VALUE, DEFAULT_METRIC_VALUE, cell.filters);
+        refRowForcomputedSaColumn[i] = new AggConfigResult(cell.aggConfig, null, DEFAULT_METRIC_VALUE, DEFAULT_METRIC_VALUE, cell.filters);
       }
     }
 
@@ -586,7 +586,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
             newColDefaultMetric = new AggConfigResult(row[i].aggConfig, null, DEFAULT_METRIC_VALUE, DEFAULT_METRIC_VALUE, row[i].filters);
           }
           else {
-            newColDefaultMetric = createComputedCell(newCol, refRowForComputedColumn, totalHits, table);
+            newColDefaultMetric = createComputedCell(newCol, refRowForcomputedSaColumn, totalHits, table);
           }
           newColDefaultMetrics.push(newColDefaultMetric);
           for (let j = 0; j < newRows.length - 1; j++) {
@@ -825,10 +825,10 @@ function EnhancedTableSaVisController ($scope, Private, config) {
         }
 
         // add computed columns
-        _.forEach(params.computedColumns, function (computedColumn, index) {
-          if (computedColumn.enabled) {
-            const newColumn = createColumn(computedColumn, index, totalHits, splitColIndex, firstTable.columns, params.totalFunc);
-            addComputedColumnToTables(tableGroups.tables, index, newColumn, totalHits);
+        _.forEach(params.computedSaColumns, function (computedSaColumn, index) {
+          if (computedSaColumn.enabled) {
+            const newColumn = createColumn(computedSaColumn, index, totalHits, splitColIndex, firstTable.columns, params.totalFunc);
+            addcomputedSaColumnToTables(tableGroups.tables, index, newColumn, totalHits);
           }
         });
 
@@ -878,8 +878,8 @@ function EnhancedTableSaVisController ($scope, Private, config) {
         // process filter bar
         processFilterBarAndRefreshTable();
 		
-		console.log("Check Last Data Table - table")
-		console.log(table)
+		console.log("Check Last Data Table - tableGroups.tables")
+		console.log(tableGroups.tables)
 		
 		console.log("Check Parameters - params")
 		console.log(params)

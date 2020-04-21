@@ -32,9 +32,9 @@ uiModules.get('kibana/enhanced-table-sa')
           _.extend($scope.editorState.params, $scope.vis.type.params.defaults);
         }
 
-        $scope.addComputedColumn = function (computedColumns) {
-          $scope.newComputedColumn = true;
-          computedColumns.push({
+        $scope.addcomputedSaColumn = function (computedSaColumns) {
+          $scope.newcomputedSaColumn = true;
+          computedSaColumns.push({
             label: 'Value squared',
             formula: 'col0 * col0',
             format: 'number',
@@ -50,20 +50,20 @@ uiModules.get('kibana/enhanced-table-sa')
           });
         };
 
-        $scope.removeComputedColumn = function (computedColumnToDelete, computedColumns) {
-          const index = computedColumns.indexOf(computedColumnToDelete);
+        $scope.removecomputedSaColumn = function (computedSaColumnToDelete, computedSaColumns) {
+          const index = computedSaColumns.indexOf(computedSaColumnToDelete);
           if (index >= 0) {
-            computedColumns.splice(index, 1);
+            computedSaColumns.splice(index, 1);
           }
 
-          if (computedColumns.length === 1) {
-            computedColumns[0].enabled = true;
+          if (computedSaColumns.length === 1) {
+            computedSaColumns[0].enabled = true;
           }
         };
 
         $scope.initEditorOpen = function () {
-          if ($scope.newComputedColumn) {
-            $scope.newComputedColumn = false;
+          if ($scope.newcomputedSaColumn) {
+            $scope.newcomputedSaColumn = false;
             return true;
           }
           else {
