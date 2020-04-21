@@ -767,7 +767,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
   const runAudioRedAlert = function() {
 	try{
 		let audio = new Audio(); 
-		audio.src = "audio/alert_red.wav";
+		audio.src = "./audio/alert_red.wav";
 		audio.crossOrigin = "anonymous";
 		console.log("log : enhanced-table-sa-vis-controller - runAudioRedAlert - audio ");
 		console.log(audio);
@@ -778,17 +778,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		console.log(e.message);	
 	}   
   }
-  
-  const runAudioRedAlert2 = function() {
-	try{
-		$('#audio').html('<audio autoplay><source src="audio/alert_red.wav"></audio>');
-	}
-	catch(e){
-		console.log("runAudioRedAlert2")
-		console.log(e.message);	
-	}   
-  }
-  
+
   let isNumeric = function (n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
   }
@@ -975,7 +965,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				
 				if(alarmCheck){
 					runAudioRedAlert();
-					runAudioRedAlert2();
 				}
 			});
         }
