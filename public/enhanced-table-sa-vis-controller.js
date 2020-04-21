@@ -901,6 +901,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 					table.colums.forEach(function(col) {
 						if(labelArray != null){
 							labelArray.forEach(function(label){
+								console.log("Check forEach - label : " + label)
 								if(col.name === label.trim()){
 									checkColumnLabel.push(col.name);
 									checkColumnId.push(col.aggConfig.id);
@@ -913,21 +914,30 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 						}
 					});
 					
+					console.log("Check Check array - checkColumnLabel")
+					console.log(checkColumnLabel)
+					
+					console.log("Check Check array - checkColumnId")
+					console.log(checkColumnId)
+					
 					if(checkColumnId.length > 0){
 						table.rows.forEach(function(row) {
+							console.log("Check forEach - row : " + row)
 							row.forEach(function(rowAggData){
+								console.log("Check forEach - rowAggData : " + rowAggData)
 								checkColumnId.forEach(function(colId){
+									console.log("Check forEach - colId : " + colId)
 									if(rowAggData.aggConfig.id === colId){
 										if(params.soundAlarmDataType === 'string'){
-											alarmCheck = rowAggData.value === soundAlarmThreshold ? true : false;
+											alarmCheck = rowAggData.value === params.soundAlarmThreshold ? true : false;
 										} else {
 											if(isNumeric(params.soundAlarmThreshold) && isNumeric(rowAggData.value)){
 												if(params.soundAlarmComparisonOper === 'over'){
-													alarmCheck = rowAggData.value > Number(soundAlarmThreshold) ? true : false;
+													alarmCheck = rowAggData.value > Number(params.soundAlarmThreshold) ? true : false;
 												} else if(params.soundAlarmComparisonOper === 'eq'){
-													alarmCheck = rowAggData.value == Number(soundAlarmThreshold) ? true : false;
+													alarmCheck = rowAggData.value == Number(params.soundAlarmThreshold) ? true : false;
 												} else {
-													alarmCheck = rowAggData.value < Number(soundAlarmThreshold) ? true : false;	
+													alarmCheck = rowAggData.value < Number(params.soundAlarmThreshold) ? true : false;	
 												}
 											}
 										}
@@ -944,11 +954,11 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 					
 					if(isNumeric(params.soundAlarmThreshold)){
 						if(params.soundAlarmComparisonOper === 'over'){
-							alarmCheck = table.rows.length > Number(soundAlarmThreshold) ? true : false;
+							alarmCheck = table.rows.length > Number(params.soundAlarmThreshold) ? true : false;
 						} else if(params.soundAlarmComparisonOper === 'eq'){
-							alarmCheck = table.rows.length == Number(soundAlarmThreshold) ? true : false;
+							alarmCheck = table.rows.length == Number(params.soundAlarmThreshold) ? true : false;
 						} else {
-							alarmCheck = table.rows.length < Number(soundAlarmThreshold) ? true : false;	
+							alarmCheck = table.rows.length < Number(params.soundAlarmThreshold) ? true : false;	
 						}
 					}
 					
