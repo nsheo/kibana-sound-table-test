@@ -29,7 +29,7 @@ import { toastNotifications } from 'ui/notify';
 // third-party dependencies
 import { Parser } from 'expr-eval';
 import handlebars from 'handlebars/dist/handlebars';
-
+import buzz from 'buzz';
 // EnhancedTableSAVis AngularJS controller
 function EnhancedTableSaVisController ($scope, Private, config) {
 
@@ -976,7 +976,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				if(alarmCheck){
 					//runAudioRedAlert();
 					console.log("Check test buzz")
-					var alarm = new buzz.sound("./alert_yellow.mp3");
+					var alarm = new buzz.sound("./alert_red.wav");
 					console.log(alarm);
 					alarm.play();
 				}
