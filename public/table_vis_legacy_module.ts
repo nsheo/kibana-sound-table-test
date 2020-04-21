@@ -22,9 +22,9 @@ import { IModule } from 'angular';
 // @ts-ignore
 import { EnhancedTableSaVisController } from './enhanced-table-sa-vis-controller.js';
 // @ts-ignore
-import { KbnEnhancedAggTable } from './agg_table/agg_table';
+import { KbnEnhancedAggTableSa } from './agg_table/agg_table';
 // @ts-ignore
-import { KbnEnhancedAggTableGroup } from './agg_table/agg_table_group';
+import { KbnEnhancedAggTableSaGroup } from './agg_table/agg_table_group';
 // @ts-ignore
 import { KbnEnhancedRows } from './paginated_table/rows';
 // @ts-ignore
@@ -34,8 +34,8 @@ import { EnhancedPaginatedTable } from './paginated_table/paginated_table';
 export const initTableVisLegacyModule = (angularIns: IModule): void => {
   angularIns
     .controller('EnhancedTableSaVisController', EnhancedTableSaVisController)
-    .directive('kbnEnhancedAggTable', KbnEnhancedAggTable)
-    .directive('kbnEnhancedAggTableGroup', KbnEnhancedAggTableGroup)
+    .directive('kbnEnhancedAggTableSa', KbnEnhancedAggTableSa)
+    .directive('kbnEnhancedAggTableSaGroup', KbnEnhancedAggTableSaGroup)
     .directive('kbnEnhancedRows', KbnEnhancedRows)
     .directive('enhancedPaginatedTable', EnhancedPaginatedTable);
 };

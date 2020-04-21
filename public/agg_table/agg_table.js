@@ -21,7 +21,7 @@ import _ from 'lodash';
 import aggTableTemplate from './agg_table.html';
 import { npStart } from 'ui/new_platform';
 
-export function KbnEnhancedAggTable(config, RecursionHelper) {
+export function KbnEnhancedAggTableSa(config, RecursionHelper) {
   const fieldFormats = npStart.plugins.data.fieldFormats;
   const numberFormatter = fieldFormats.getDefaultInstance('number').getConverterFor('text');
 
