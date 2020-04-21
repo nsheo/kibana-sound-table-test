@@ -24,31 +24,31 @@ import { move } from 'ui/utils/collection';
 
 uiModules
   .get('kibana')
-  .directive('draggableContainer', function () {
+  .directive('draggableSaContainer', function () {
 
     const $scopes = new WeakMap();
 
     return {
       restrict: 'A',
       scope: true,
-      controllerAs: 'draggableContainerCtrl',
+      controllerAs: 'draggableSaContainerCtrl',
       controller($scope, $attrs, $parse, $element) {
         $scopes.set($element.get(0), $scope);
         this.linkDraggableItem = (el, $scope) => {
           $scopes.set(el, $scope);
         };
 
-        this.getList = () => $parse($attrs.draggableContainer)($scope);
+        this.getList = () => $parse($attrs.draggableSaContainer)($scope);
       },
       link($scope, $el) {
         const drake = dragula({
           containers: $el.toArray(),
           moves(el, source, handle) {
             const itemScope = $scopes.get(el);
-            if (!itemScope || !('draggableItemCtrl' in itemScope)) {
+            if (!itemScope || !('draggableSaItemCtrl' in itemScope)) {
               return; // only [draggable-item] is draggable
             }
-            return itemScope.draggableItemCtrl.moves(handle);
+            return itemScope.draggableSaItemCtrl.moves(handle);
           }
         });
 
@@ -94,10 +94,10 @@ uiModules
         }
 
         function drop(el, target, source, sibling) {
-          const list = $scope.draggableContainerCtrl.getList();
+          const list = $scope.draggableSaContainerCtrl.getList();
           const itemScope = $scopes.get(el);
           if (!itemScope) return;
-          const item = itemScope.draggableItemCtrl.getItem();
+          const item = itemScope.draggableSaItemCtrl.getItem();
           const fromIndex = list.indexOf(item);
           const siblingIndex = getItemIndexFromElement(list, sibling);
 
@@ -122,7 +122,7 @@ uiModules
 
           const scope = $scopes.get(element);
           if (!scope) return;
-          const item = scope.draggableItemCtrl.getItem();
+          const item = scope.draggableSaItemCtrl.getItem();
           const index = list.indexOf(item);
 
           return index;

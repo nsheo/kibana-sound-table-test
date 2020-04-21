@@ -17,6 +17,17 @@
  * under the License.
  */
 
-import './draggable_container';
-import './draggable_handle';
-import './draggable_item';
+import { uiModules } from 'ui/modules';
+
+uiModules
+  .get('kibana')
+  .directive('draggableSaHandle', function () {
+    return {
+      restrict: 'A',
+      require: '^draggableSaItem',
+      link($scope, $el, attr, ctrl) {
+        ctrl.registerHandle($el);
+        $el.addClass('gu-handle');
+      }
+    };
+  });

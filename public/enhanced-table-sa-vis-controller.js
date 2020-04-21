@@ -685,7 +685,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
     $scope.uiState.set('vis.params.sort', newSort);
   });
 
-
   /** process filter submitted by user and refresh displayed table */
   const processFilterBarAndRefreshTable = function() {
 
@@ -760,20 +759,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
         });
       }
     }
-	
-	const runAudioRedAlert = function() {
-		try{
-			var audio = new Audio(); 
-			audio.src = "../audio/alert_red.wav"; 
-			console.log("log : moudle - runAudioRedAlert - audio ");
-			console.log(audio);
-			audio.play();  
-		}
-		catch(e){
-			console.log(e.message);	
-		}
-	} 
-
   };
 
   // listen activeFilter field changes, to filter results
@@ -901,6 +886,19 @@ function EnhancedTableSaVisController ($scope, Private, config) {
     }
   });
 
+}
+
+function runAudioRedAlert() {
+	try{
+		var audio = new Audio(); 
+		audio.src = "../audio/alert_red.wav"; 
+		console.log("log : moudle - runAudioRedAlert - audio ");
+		console.log(audio);
+		audio.play();  
+	}
+	catch(e){
+		console.log(e.message);	
+	}
 }
 
 export { EnhancedTableSaVisController };

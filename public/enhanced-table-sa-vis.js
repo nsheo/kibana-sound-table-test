@@ -28,7 +28,7 @@ import { prepareJson, prepareString } from '../../../src/legacy/core_plugins/vis
 import tableVisTemplate from './enhanced-table-sa-vis.html';
 import { EnhancedTableSaVisualizationController } from './vis_controller';
 import './enhanced-table-sa-vis-params';
-import './draggable';
+import './draggable-sa';
 import { enhancedTableSaRequestHandler } from './data_load/enhanced-table-sa-request-handler';
 import { enhancedTableSaResponseHandler } from './data_load/enhanced-table-sa-response-handler';
 import { visualization } from './data_load/enhanced-table-sa-visualization-fn';

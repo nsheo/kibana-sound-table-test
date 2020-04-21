@@ -7,10 +7,10 @@
         Computed Columns
     </div>
 
-    <div draggable-container="editorState.params.computedSaColumns" class="computed-sa-columns">
+    <div draggable-sa-container="editorState.params.computedSaColumns" class="computed-sa-columns">
       <div ng-repeat="computedSaColumn in editorState.params.computedSaColumns"
            ng-init="editorOpen = initEditorOpen()"
-           draggable-item="computedSaColumn"
+           draggable-sa-item="computedSaColumn"
            class="euiAccordion visEditorSidebar__section visEditorSidebar__collapsible visEditorSidebar__collapsible--marginBottom">
 
            <!-- header -->
@@ -69,7 +69,7 @@
 
                   <!-- drag handle -->
                   <button
-                    draggable-handle
+                    draggable-sa-handle
                     ng-if="editorState.params.computedSaColumns.length > 1"
                     aria-label="{{::'enhancedTableSaVis.modifycomputedSaColumnOrderAriaLabel' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
                     tooltip="{{::'enhancedTableSaVis.modifycomputedSaColumnOrderButtonTooltip' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"

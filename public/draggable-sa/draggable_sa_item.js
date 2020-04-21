@@ -22,16 +22,16 @@ import { uiModules } from 'ui/modules';
 
 uiModules
   .get('kibana')
-  .directive('draggableItem', function () {
+  .directive('draggableSaItem', function () {
     return {
       restrict: 'A',
-      require: '^draggableContainer',
+      require: '^draggableSaContainer',
       scope: true,
-      controllerAs: 'draggableItemCtrl',
+      controllerAs: 'draggableSaItemCtrl',
       controller($scope, $attrs, $parse) {
         const dragHandles = $();
 
-        this.getItem = () => $parse($attrs.draggableItem)($scope);
+        this.getItem = () => $parse($attrs.draggableSaItem)($scope);
         this.registerHandle = $el => {
           dragHandles.push(...$el);
         };
@@ -42,8 +42,8 @@ uiModules
           return movable;
         };
       },
-      link($scope, $el, attr, draggableController) {
-        draggableController.linkDraggableItem($el.get(0), $scope);
+      link($scope, $el, attr, draggableSaController) {
+        draggableSaController.linkDraggableItem($el.get(0), $scope);
       }
     };
   });
