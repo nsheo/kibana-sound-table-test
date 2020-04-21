@@ -23,7 +23,7 @@ import { existsSync } from 'fs';
 export default function (kibana) {
 
   return new kibana.Plugin({
-    id: 'enhanced-table',
+    id: 'enhanced-table-sa',
     uiExports: {
       visTypes: [
         'plugins/enhanced-table-sa/enhanced-table-sa-vis'

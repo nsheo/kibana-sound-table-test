@@ -29,8 +29,8 @@ import tableVisTemplate from './enhanced-table-sa-vis.html';
 import { EnhancedTableSaVisualizationController } from './vis_controller';
 import './enhanced-table-sa-vis-params';
 import './draggable';
-import { enhancedTableRequestHandler } from './data_load/enhanced-table-request-handler';
-import { enhancedTableResponseHandler } from './data_load/enhanced-table-response-handler';
+import { enhancedTableSaRequestHandler } from './data_load/enhanced-table-sa-request-handler';
+import { enhancedTableSaResponseHandler } from './data_load/enhanced-table-sa-response-handler';
 import { visualization } from './data_load/enhanced-table-sa-visualization-fn';
 
 
@@ -153,7 +153,7 @@ const tableVisTypeDefinition = {
   }
 };
 
-//register enhanced-table visualization function, to customize elasticsearch response transformation to table data
+//register enhanced-table-sa visualization function, to customize elasticsearch response transformation to table data
 npSetup.plugins.expressions.registerFunction(visualization);
 
 //register the vis type definition
