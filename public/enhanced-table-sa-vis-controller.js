@@ -915,11 +915,8 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				
 				if(checkColumnId.length > 0){
 					table.rows.forEach(function(row) {
-						if(alarmCheck) break;
 						row.forEach(function(rowAggData){
-							if(alarmCheck) break;
 							checkColumnId.forEach(function(colId){
-								if(alarmCheck) break;
 								if(rowAggData.aggConfig.id === colId){
 									if(params.soundAlarmDataType === 'string'){
 										alarmCheck = rowAggData.value === soundAlarmThreshold ? true : false;
@@ -935,8 +932,11 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 										}
 									}
 								}
+								return (alarmCheck);
 							});
+							return (alarmCheck);
 						});
+						return (alarmCheck);
 					});
 				}
 			  
