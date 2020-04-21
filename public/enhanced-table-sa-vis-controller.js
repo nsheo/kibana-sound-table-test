@@ -767,13 +767,13 @@ function EnhancedTableSaVisController ($scope, Private, config) {
   const runAudioRedAlert = function() {
 	try{
 		let audio = new Audio(); 
-		audio.src = "./audio/alert_red.wav";
+		audio.src = './alert_red.wav';
 		audio.crossOrigin = "anonymous";
 		console.log("log : enhanced-table-sa-vis-controller - runAudioRedAlert - audio ");
 		console.log(audio);
 		var promise = audio.play();
 		if(promise){
-			p.catch(function(e){
+			promise.catch(function(e){
 				console.log("runAudioRedAlertPlay")
 				console.log(e.message);	
 			});
