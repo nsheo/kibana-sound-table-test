@@ -767,7 +767,8 @@ function EnhancedTableSaVisController ($scope, Private, config) {
   const runAudioRedAlert = function() {
 	try{
 		let audio = new Audio(); 
-		audio.src = './alert_red.wav';
+		//audio.src = './alert_red.wav';
+		audio.src = './alert_yellow.mp3';
 		audio.crossOrigin = "anonymous";
 		console.log("log : enhanced-table-sa-vis-controller - runAudioRedAlert - audio ");
 		console.log(audio);
@@ -787,16 +788,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 	}   
   }
   
-  
-  const runAudioRedAlerts = function() {
-	try{
-		
-	}
-	catch(e){
-		console.log("runAudioRedAlert")
-		console.log(e.message);	
-	}   
-  }
 
   let isNumeric = function (n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
@@ -984,7 +975,9 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				
 				if(alarmCheck){
 					runAudioRedAlert();
-					$('#audio').html('<audio autoplay><source src="./alert_yellow.mp3"></audio>');
+					console.log("Check test 2")
+					var buf = $('#audio').html('<audio autoplay><source src="./alert_yellow.mp3"></audio>');
+					console.log(buf)
 				}
 			});
         }
