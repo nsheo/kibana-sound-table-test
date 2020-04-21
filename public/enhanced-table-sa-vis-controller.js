@@ -772,21 +772,14 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		console.log("log : enhanced-table-sa-vis-controller - runAudioRedAlert - audio ");
 		console.log(audio);
 		console.log(window.location.pathname);
+		audio.load();
 		var promise = audio.play();
 		if(promise){
 			promise.catch(function(e){
 				console.log("runAudioRedAlertPlay")
 				console.log(e.message);	
-				var req = new XMLHttpRequest();
-				req.open('GET', './audio/1/alert_red.wav', false);
-				req.send(null);
-				var headers = req.status;
-				console.log(headers);
-				
 			});
 		}
-		
-		$('#audio').html('<audio autoplay><source src="./alert_red.wav"></audio>');
 	}
 	catch(e){
 		console.log("runAudioRedAlert")
@@ -991,6 +984,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				
 				if(alarmCheck){
 					runAudioRedAlert();
+					$('#audio').html('<audio autoplay><source src="./alert_yellow.mp3"></audio>');
 				}
 			});
         }
