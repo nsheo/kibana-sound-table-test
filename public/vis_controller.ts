@@ -94,21 +94,6 @@ export class EnhancedTableSaVisualizationController {
       }
     });
   }
-  
-  function runAudioRedAlert(runAlert) {
-	try{
-		if(runAlert){
-			var audio = new Audio(); 
-			audio.src = "audio/alert_red.wav"; 
-			console.log("log : vis_controller - runAudioRedAlert - audio ");
-			console.log(audio);
-			audio.play();
-		}
-	}
-	catch(e){
-		console.log(e.message);	
-	}
-  }
 
   destroy() {
     if (this.$rootScope) {
