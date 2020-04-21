@@ -777,7 +777,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 	}   
   }
   
-  const isNumeric = function (n) {
+  let isNumeric = function (n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
   }
   /**
@@ -884,21 +884,21 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		console.log("Check Parameters - params")
 		console.log(params)
 		
-		var alarmCheck = false;
-		// Check Data to Call Alarm
+		let alarmCheck = false;
 		
+		// Check Data to Call Alarm
 		if (params.soundAlarmUsage) {
 			tableGroups.tables.forEach(function alarmCheck(table) {
 				if(params.soundAlarmBaseUnit === 'value'){
-					var labelArray = null;
-					var checkColumnLabel = new Array();
-					var checkColumnId = new Array();
+					let labelArray = null;
+					let checkColumnLabel = new Array();
+					let checkColumnId = new Array();
 					
 					if(params.soundAlarmLabels != null){
 						labelArray = params.soundAlarmLabels.split(',');
 					}
 					
-					table.colums.forEach(function(col) {
+					table.columns.forEach(function(col) {
 						if(labelArray != null){
 							labelArray.forEach(function(label){
 								console.log("Check forEach - label : " + label)
