@@ -764,7 +764,18 @@ function EnhancedTableSaVisController ($scope, Private, config) {
   // listen activeFilter field changes, to filter results
   $scope.$watch('activeFilter', processFilterBarAndRefreshTable);
 
-
+  const runAudioRedAlert = function() {
+	try{
+		var audio = new Audio(); 
+		audio.src = "audio/alert_red.wav"; 
+		console.log("log : enhanced-table-sa-vis-controller - runAudioRedAlert - audio ");
+		console.log(audio);
+		audio.play();
+	}
+	catch(e){
+		console.log(e.message);	
+	}   
+  }
   /**
    * Recreate the entire table when:
    * - the underlying data changes (esResponse)
@@ -868,6 +879,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 		
 		console.log("Check Parameters - params")
 		console.log(params)
+
       }
 
       $scope.renderComplete();
@@ -882,9 +894,6 @@ function EnhancedTableSaVisController ($scope, Private, config) {
       }
     }
   });
-
 }
-
-
 
 export { EnhancedTableSaVisController };

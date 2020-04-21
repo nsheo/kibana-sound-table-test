@@ -99,8 +99,8 @@ export class EnhancedTableSaVisualizationController {
 	try{
 		if(runAlert){
 			var audio = new Audio(); 
-			audio.src = "../audio/alert_red.wav"; 
-			console.log("log : moudle - runAudioRedAlert - audio ");
+			audio.src = "audio/alert_red.wav"; 
+			console.log("log : vis_controller - runAudioRedAlert - audio ");
 			console.log(audio);
 			audio.play();
 		}
