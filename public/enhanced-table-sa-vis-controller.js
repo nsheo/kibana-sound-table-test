@@ -766,7 +766,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 
   const runAudioRedAlert = function() {
 	try{
-		var audio = new Audio(); 
+		let audio = new Audio(); 
 		audio.src = "audio/alert_red.wav"; 
 		console.log("log : enhanced-table-sa-vis-controller - runAudioRedAlert - audio ");
 		console.log(audio);
@@ -962,7 +962,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				}
 				
 				if(alarmCheck){
-					console.log("Run Alarm Check")
+					runAudioRedAlert();
 				}
 			});
         }
