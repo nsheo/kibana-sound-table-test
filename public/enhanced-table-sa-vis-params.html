@@ -45,8 +45,8 @@
                   <button
                     ng-if="computedColumn.enabled"
                     ng-click="computedColumn.enabled = false"
-                    aria-label="{{::'enhancedTableVis.disableComputedColButtonAriaLabel' | i18n: { defaultMessage: 'Disable Column' } }}"
-                    tooltip="{{::'enhancedTableVis.disableComputedColButtonTooltip' | i18n: { defaultMessage: 'Disable Column' } }}"
+                    aria-label="{{::'enhancedTableSaVis.disableComputedColButtonAriaLabel' | i18n: { defaultMessage: 'Disable Column' } }}"
+                    tooltip="{{::'enhancedTableSaVis.disableComputedColButtonTooltip' | i18n: { defaultMessage: 'Disable Column' } }}"
                     tooltip-append-to-body="true"
                     data-test-subj="disableComputedColumnBtn"
                     type="button"
@@ -58,8 +58,8 @@
                   <button
                     ng-if="!computedColumn.enabled"
                     ng-click="computedColumn.enabled = true"
-                    aria-label="{{::'enhancedTableVis.enableComputedColButtonAriaLabel' | i18n: { defaultMessage: 'Enable Column' } }}"
-                    tooltip="{{::'enhancedTableVis.enableComputedColButtonTooltip' | i18n: { defaultMessage: 'Enable Column' } }}"
+                    aria-label="{{::'enhancedTableSaVis.enableComputedColButtonAriaLabel' | i18n: { defaultMessage: 'Enable Column' } }}"
+                    tooltip="{{::'enhancedTableSaVis.enableComputedColButtonTooltip' | i18n: { defaultMessage: 'Enable Column' } }}"
                     tooltip-append-to-body="true"
                     data-test-subj="enableComputedColumnBtn"
                     type="button"
@@ -71,15 +71,15 @@
                   <button
                     draggable-handle
                     ng-if="editorState.params.computedColumns.length > 1"
-                    aria-label="{{::'enhancedTableVis.modifyComputedColumnOrderAriaLabel' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
-                    tooltip="{{::'enhancedTableVis.modifyComputedColumnOrderButtonTooltip' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
+                    aria-label="{{::'enhancedTableSaVis.modifyComputedColumnOrderAriaLabel' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
+                    tooltip="{{::'enhancedTableSaVis.modifyComputedColumnOrderButtonTooltip' | i18n: { defaultMessage: 'Modify Order by Dragging' } }}"
                     tooltip-append-to-body="true"
                     type="button"
                     keyboard-move="onPriorityReorder(direction)"
                     class="euiButtonIcon euiButtonIcon--text">
                     <icon type="'grab'"/>
                     <span class="euiScreenReaderOnly"
-                      i18n-id="enhancedTableVis.howToModifyScreenReaderOrderDescription"
+                      i18n-id="enhancedTableSaVis.howToModifyScreenReaderOrderDescription"
                       i18n-default-message="Use up and down key on this button to move this computed column up and down in the order."
                     >
                     </span>
@@ -87,9 +87,9 @@
 
                   <!-- remove computed column -->
                   <button
-                    aria-label="{{::'enhancedTableVis.removeComputedColumnButtonAriaLabel' | i18n: { defaultMessage: 'Remove Column' } }}"
+                    aria-label="{{::'enhancedTableSaVis.removeComputedColumnButtonAriaLabel' | i18n: { defaultMessage: 'Remove Column' } }}"
                     ng-click="removeComputedColumn(computedColumn, editorState.params.computedColumns)"
-                    tooltip="{{::'enhancedTableVis.removeComputedColumnButtonTooltip' | i18n: { defaultMessage: 'Remove Column' } }}"
+                    tooltip="{{::'enhancedTableSaVis.removeComputedColumnButtonTooltip' | i18n: { defaultMessage: 'Remove Column' } }}"
                     tooltip-append-to-body="true"
                     type="button"
                     class="euiButtonIcon euiButtonIcon--text">

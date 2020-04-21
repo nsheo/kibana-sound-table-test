@@ -31,7 +31,7 @@ function sum(tableRows, columnIndex) {
 /**
  * Compute and return one column total, given its column index and total function
  */
-export function computeColumnTotal(columnIndex, totalFunc, table) {
+export function computeColumnSaTotal(columnIndex, totalFunc, table) {
   let total = undefined;
   let isFieldNumeric = false;
   let isFieldDate = false;

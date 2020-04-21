@@ -18,14 +18,14 @@
  */
 
 import { uiModules } from 'ui/modules';
-import enhancedTableVisParamsTemplate from './enhanced-table-vis-params.html';
+import enhancedTableSaVisParamsTemplate from './enhanced-table-sa-vis-params.html';
 import _ from 'lodash';
 
-uiModules.get('kibana/enhanced-table-test')
-  .directive('enhancedTableVisParams', function () {
+uiModules.get('kibana/enhanced-table-sa')
+  .directive('enhancedTableSaVisParams', function () {
     return {
       restrict: 'E',
-      template: enhancedTableVisParamsTemplate,
+      template: enhancedTableSaVisParamsTemplate,
       link: function ($scope) {
         $scope.totalAggregations = ['sum', 'avg', 'min', 'max', 'count'];
         if ($scope.editorState.params.perPage === undefined) {

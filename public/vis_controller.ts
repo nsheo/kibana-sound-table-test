@@ -25,9 +25,9 @@ import { npStart } from './legacy_imports';
 import { getAngularModule } from './get_inner_angular';
 import { initTableVisLegacyModule } from './table_vis_legacy_module';
 
-const innerAngularName = 'kibana/enhanced_table_vis';
+const innerAngularName = 'kibana/enhanced_table_sa_vis';
 
-export class EnhancedTableVisualizationController {
+export class EnhancedTableSaVisualizationController {
   private tableVisModule: IModule | undefined;
   private injector: auto.IInjectorService | undefined;
   el: JQuery<Element>;

@@ -19,7 +19,7 @@
 
 import _ from 'lodash';
 
-import { computeColumnTotal } from './column_total_computer';
+import { computeColumnSaTotal } from './column_sa_total_computer';
 import AggConfigResult from './data_load/agg_config_result';
 
 import { npStart } from 'ui/new_platform';
@@ -30,10 +30,10 @@ import { toastNotifications } from 'ui/notify';
 import { Parser } from 'expr-eval';
 import handlebars from 'handlebars/dist/handlebars';
 
-// EnhancedTableVis AngularJS controller
-function EnhancedTableVisController ($scope, Private, config) {
+// EnhancedTableSAVis AngularJS controller
+function EnhancedTableSaVisController ($scope, Private, config) {
 
-  class EnhancedTableError {
+  class EnhancedTableSaError {
     constructor(message) {
       this.message = message;
     }
@@ -57,7 +57,7 @@ function EnhancedTableVisController ($scope, Private, config) {
     // inject column total references
     _.forEach(column.template.paramsTotals, function (templateParamTotal) {
       if (table.columns[templateParamTotal].total === undefined) {
-        table.columns[templateParamTotal].total = computeColumnTotal(templateParamTotal, column.template.totalFunc, table);
+        table.columns[templateParamTotal].total = computeColumnSaTotal(templateParamTotal, column.template.totalFunc, table);
       }
       templateContext[`total${templateParamTotal}`] = table.columns[templateParamTotal].total;
     });
@@ -106,7 +106,7 @@ function EnhancedTableVisController ($scope, Private, config) {
       return getOriginalColIndex(columnIndex, splitColIndex);
     }
     else {
-      throw new EnhancedTableError(`In ${inputType} '${input}', column with label '${colTitle}' does not exist`);
+      throw new EnhancedTableSaError(`In ${inputType} '${input}', column with label '${colTitle}' does not exist`);
     }
   };
 
@@ -131,7 +131,7 @@ function EnhancedTableVisController ($scope, Private, config) {
       let colIndex = parseInt(regexMatch[1]);
       if (colIndex >= columns.length) {
         colIndex = getOriginalColIndex(colIndex, splitColIndex);
-        throw new EnhancedTableError(`In computed column '${inputFormula}', column number ${colIndex} does not exist`);
+        throw new EnhancedTableSaError(`In computed column '${inputFormula}', column number ${colIndex} does not exist`);
       }
       formulaParamsCols.push(colIndex);
     }
@@ -152,7 +152,7 @@ function EnhancedTableVisController ($scope, Private, config) {
       let colIndex = parseInt(regexMatch[1]);
       if (colIndex >= columns.length) {
         colIndex = getOriginalColIndex(colIndex, splitColIndex);
-        throw new EnhancedTableError(`In computed column '${inputFormula}', column number ${colIndex} does not exist`);
+        throw new EnhancedTableSaError(`In computed column '${inputFormula}', column number ${colIndex} does not exist`);
       }
       formulaParamsTotals.push(colIndex);
     }
@@ -214,7 +214,7 @@ function EnhancedTableVisController ($scope, Private, config) {
       };
     }
     catch (e) {
-      throw new EnhancedTableError(`Invalid computed column formula '${inputFormula}' (${e.message})`);
+      throw new EnhancedTableSaError(`Invalid computed column formula '${inputFormula}' (${e.message})`);
     }
   };
 
@@ -229,7 +229,7 @@ function EnhancedTableVisController ($scope, Private, config) {
     // inject column total references
     _.forEach(formula.paramsTotals, function (formulaParamTotal) {
       if (table.columns[formulaParamTotal].total === undefined) {
-        table.columns[formulaParamTotal].total = computeColumnTotal(formulaParamTotal, formula.totalFunc, table);
+        table.columns[formulaParamTotal].total = computeColumnSaTotal(formulaParamTotal, formula.totalFunc, table);
       }
       formulaParams[`total${formulaParamTotal}`] = table.columns[formulaParamTotal].total;
     });
@@ -809,7 +809,7 @@ function EnhancedTableVisController ($scope, Private, config) {
         if (splitColIndex !== -1) {
           const lastBucketIndex = _.findLastIndex(firstTable.columns, col => col.aggConfig.schema.group === 'buckets');
           if (splitColIndex !== lastBucketIndex) {
-            throw new EnhancedTableError('\'Split cols\' bucket must be the last one');
+            throw new EnhancedTableSaError('\'Split cols\' bucket must be the last one');
           }
         }
 		
@@ -892,7 +892,7 @@ function EnhancedTableVisController ($scope, Private, config) {
 
     }
     catch (e) {
-      if (e instanceof EnhancedTableError) {
+      if (e instanceof EnhancedTableSaError) {
         notifyError(e.message);
       }
       else {
@@ -903,4 +903,4 @@ function EnhancedTableVisController ($scope, Private, config) {
 
 }
 
-export { EnhancedTableVisController };
+export { EnhancedTableSaVisController };

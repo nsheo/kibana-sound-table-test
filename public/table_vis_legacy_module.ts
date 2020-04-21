@@ -20,7 +20,7 @@
 import { IModule } from 'angular';
 
 // @ts-ignore
-import { EnhancedTableVisController } from './enhanced-table-vis-controller.js';
+import { EnhancedTableSaVisController } from './enhanced-table-sa-vis-controller.js';
 // @ts-ignore
 import { KbnEnhancedAggTable } from './agg_table/agg_table';
 // @ts-ignore
@@ -33,7 +33,7 @@ import { EnhancedPaginatedTable } from './paginated_table/paginated_table';
 /** @internal */
 export const initTableVisLegacyModule = (angularIns: IModule): void => {
   angularIns
-    .controller('EnhancedTableVisController', EnhancedTableVisController)
+    .controller('EnhancedTableSaVisController', EnhancedTableSaVisController)
     .directive('kbnEnhancedAggTable', KbnEnhancedAggTable)
     .directive('kbnEnhancedAggTableGroup', KbnEnhancedAggTableGroup)
     .directive('kbnEnhancedRows', KbnEnhancedRows)

@@ -25,27 +25,27 @@ import { npSetup } from './legacy_imports';
 import { createFiltersFromEvent } from '../../../src/legacy/core_plugins/visualizations/public/np_ready/public/filters/vis_filters';
 import { prepareJson, prepareString } from '../../../src/legacy/core_plugins/visualizations/public/np_ready/public/legacy/build_pipeline';
 
-import tableVisTemplate from './enhanced-table-vis.html';
-import { EnhancedTableVisualizationController } from './vis_controller';
-import './enhanced-table-vis-params';
+import tableVisTemplate from './enhanced-table-sa-vis.html';
+import { EnhancedTableSaVisualizationController } from './vis_controller';
+import './enhanced-table-sa-vis-params';
 import './draggable';
 import { enhancedTableRequestHandler } from './data_load/enhanced-table-request-handler';
 import { enhancedTableResponseHandler } from './data_load/enhanced-table-response-handler';
-import { visualization } from './data_load/enhanced-table-visualization-fn';
+import { visualization } from './data_load/enhanced-table-sa-visualization-fn';
 
 
 // define the visType object, which kibana will use to display and configure new Vis object of this type.
 const tableVisTypeDefinition = {
   type: 'table',
-  name: 'enhanced-table',
-  title: i18n.translate('tableVis.enhancedTableVisTitle', {
-    defaultMessage: 'Enhanced Table'
+  name: 'enhanced-table-sa',
+  title: i18n.translate('tableVis.enhancedTableSaVisTitle', {
+    defaultMessage: 'Enhanced Table Sound Alarm'
   }),
   icon: 'visTable',
-  description: i18n.translate('tableVis.enhancedTableVisDescription', {
+  description: i18n.translate('tableVis.enhancedTableSaVisDescription', {
     defaultMessage: 'Same functionality than Data Table, but with enhanced features like computed columns, filter bar and pivot table.'
   }),
-  visualization: EnhancedTableVisualizationController,
+  visualization: EnhancedTableSaVisualizationController,
   visConfig: {
     defaults: {
       perPage: 10,
@@ -76,7 +76,7 @@ const tableVisTypeDefinition = {
     template: tableVisTemplate
   },
   editorConfig: {
-    optionsTemplate: '<enhanced-table-vis-params></enhanced-table-vis-params>',
+    optionsTemplate: '<enhanced-table-sa-vis-params></enhanced-table-sa-vis-params>',
     schemas: new Schemas([
       {
         group: AggGroupNames.Metrics,
@@ -123,8 +123,8 @@ const tableVisTypeDefinition = {
       }
     ])
   },
-  requestHandler: enhancedTableRequestHandler,
-  responseHandler: enhancedTableResponseHandler,
+  requestHandler: enhancedTableSaRequestHandler,
+  responseHandler: enhancedTableSaResponseHandler,
   events: {
     filterBucket: {
       defaultAction: function (event) {

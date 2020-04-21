@@ -24,7 +24,7 @@ import { RequestAdapter, DataAdapter } from 'ui/inspector/adapters';
 import { getQueryService } from '../../../../src/plugins/data/public/services';
 
 
-export async function enhancedTableRequestHandler ({
+export async function enhancedTableSaRequestHandler ({
   partialRows,
   metricsAtAllLevels,
   timeRange,

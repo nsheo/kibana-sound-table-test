@@ -45,7 +45,7 @@ export function getAngularModule(name: string, core: CoreStart) {
 
 let initialized = false;
 
-export function getInnerAngular(name = 'kibana/enhanced_table_vis', core: CoreStart) {
+export function getInnerAngular(name = 'kibana/enhanced_table_sa_vis', core: CoreStart) {
   if (!initialized) {
     createLocalPrivateModule();
     createLocalI18nModule();
