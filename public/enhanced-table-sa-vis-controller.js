@@ -894,6 +894,7 @@ function runAudioRedAlert() {
 		audio.src = "../audio/alert_red.wav"; 
 		console.log("log : moudle - runAudioRedAlert - audio ");
 		console.log(audio);
+		window.focus();
 		audio.play();  
 	}
 	catch(e){
