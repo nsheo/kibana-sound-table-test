@@ -977,8 +977,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 					//runAudioRedAlert();
 					console.log("Check test buzz")
 					var alarm = new buzz.sound("audio/alert_red.wav");
-					console.log(alarm);
-					
+					console.log(alarm);					
 					alarm.play();
 				}
 			});
