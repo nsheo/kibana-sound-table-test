@@ -976,7 +976,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				if(alarmCheck){
 					//runAudioRedAlert();
 					console.log("Check test buzz")
-					var alarm = new buzz.sound("audio/alert_red.wav", {
+					var alarm = new buzz.sound("/audio/alert_red.wav", {
 										crossOrigin: true
 									});
 					alarm.load();
