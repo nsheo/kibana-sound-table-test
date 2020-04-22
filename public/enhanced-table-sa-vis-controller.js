@@ -976,6 +976,9 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 				if(alarmCheck){
 					//runAudioRedAlert();
 					console.log("Check check Alarm buzz")
+					var sound = document.getElementById("alarmAudio");
+					sound.play();
+
 				}
 			});
         }
