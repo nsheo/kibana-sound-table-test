@@ -890,10 +890,19 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 						if(labelArray != null){
 							labelArray.forEach(function(label){
 								console.log("Check forEach - label : " + label)
-								if(col.name === label.trim()){
-									checkColumnLabel.push(col.name);
-									checkColumnId.push(col.aggConfig.id);
+								if(col.id.startsWith('computed')) {
+									if(col.title === label.trim()){
+										checkColumnLabel.push(col.title);
+										checkColumnId.push(col.aggConfig.id);
+									}
 								}
+								else{
+									if(col.name === label.trim()){
+										checkColumnLabel.push(col.name);
+										checkColumnId.push(col.aggConfig.id);
+									}
+								}
+								
 							});
 						}
 						else {
