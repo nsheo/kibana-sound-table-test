@@ -902,11 +902,17 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 						}
 					});
 					
+					
+					console.log("Check Column data - checkColumnLabel, checkColumnId")
+					console.log(checkColumnLabel)
+					console.log(checkColumnId)
 					if(checkColumnId.length > 0){
 						table.rows.forEach(function(row) {
 							row.forEach(function(rowAggData){
 								checkColumnId.forEach(function(colId){
 									if(rowAggData.aggConfig.id === colId){
+										console.log("Check rowAggData")
+										console.log(rowAggData)
 										if(params.soundAlarmDataType === 'string'){
 											alarmCheck = rowAggData.value === params.soundAlarmThreshold ? true : false;
 										} 
