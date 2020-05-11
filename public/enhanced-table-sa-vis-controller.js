@@ -924,7 +924,10 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 										//console.log(rowAggData)
 										if(params.soundAlarmDataType === 'string'){
 											alarmCheck = rowAggData.value === params.soundAlarmThreshold ? true : false;
-										} 
+										}
+										else if(params.soundAlarmDataType === 'boolean'){
+											alarmCheck = rowAggData.value.toString() === params.soundAlarmThreshold ? true : false;
+										}
 										else {
 											if(isNumeric(params.soundAlarmThreshold) && isNumeric(rowAggData.value)){
 												if(params.soundAlarmComparisonOper === 'over'){
