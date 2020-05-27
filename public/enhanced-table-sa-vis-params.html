@@ -295,6 +295,7 @@
           <option>string</option>
           <option>number</option>
 		  <option>boolean</option>
+		  <option>timestamp</option>
         </select>
 	  </div>
 	  
@@ -309,7 +310,7 @@
 	  
 	  <div>
 	    <label>Thresholds</label>
-        <input type="text" ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmThreshold" class="form-control" placeholder="80 or Critical">
+        <input type="text" ng-disabled="!editorState.params.soundAlarmUsage" ng-model="editorState.params.soundAlarmThreshold" class="form-control" placeholder="80 or Critical or min for timestamp type">
 	  </div>
 	  
 	  <div>

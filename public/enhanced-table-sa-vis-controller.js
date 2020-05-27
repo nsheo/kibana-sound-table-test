@@ -928,6 +928,9 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 										else if(params.soundAlarmDataType === 'boolean'){
 											alarmCheck = rowAggData.value.toString() === params.soundAlarmThreshold ? true : false;
 										}
+										else if(params.soundAlarmDataType === 'timestamp'){
+											alarmCheck = (new Date() - rowAggData.value.toString()) / (1000*60) < params.soundAlarmThreshold ? true : false;
+										}
 										else {
 											if(isNumeric(params.soundAlarmThreshold) && isNumeric(rowAggData.value)){
 												if(params.soundAlarmComparisonOper === 'over'){
