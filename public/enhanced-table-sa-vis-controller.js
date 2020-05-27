@@ -889,7 +889,7 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 					table.columns.forEach(function(col) {
 						if(labelArray != null){
 							labelArray.forEach(function(label){
-								console.log("Check forEach - label : " + label)
+								//console.log("Check forEach - label : " + label)
 								if(col.id.startsWith('computed')) {
 									if(col.title === label.trim()){
 										checkColumnLabel.push(col.title);
@@ -912,16 +912,12 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 					});
 					
 					
-					//console.log("Check Column data - checkColumnLabel, checkColumnId")
-					//console.log(checkColumnLabel)
-					//console.log(checkColumnId)
 					if(checkColumnId.length > 0){
 						table.rows.forEach(function(row) {
 							row.forEach(function(rowAggData){
 								checkColumnId.forEach(function(colId){
 									if(rowAggData.aggConfig.id === colId){
-										//console.log("Check rowAggData")
-										//console.log(rowAggData)
+
 										if(params.soundAlarmDataType === 'string'){
 											alarmCheck = rowAggData.value === params.soundAlarmThreshold ? true : false;
 										}
@@ -929,7 +925,8 @@ function EnhancedTableSaVisController ($scope, Private, config) {
 											alarmCheck = rowAggData.value.toString() === params.soundAlarmThreshold ? true : false;
 										}
 										else if(params.soundAlarmDataType === 'timestamp'){
-											alarmCheck = (new Date() - rowAggData.value.toString()) / (1000*60) < params.soundAlarmThreshold ? true : false;
+											console.log("Check Timestamp : " + (new Date() - new Date(rowAggData.value.toString())) / (1000*60))
+											alarmCheck = ((new Date() - new Date(rowAggData.value.toString())) / (1000*60)) < params.soundAlarmThreshold ? true : false;
 										}
 										else {
 											if(isNumeric(params.soundAlarmThreshold) && isNumeric(rowAggData.value)){
